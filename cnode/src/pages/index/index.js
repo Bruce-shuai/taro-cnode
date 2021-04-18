@@ -21,7 +21,10 @@ class Index extends Component {
 
   componentDidMount() {
     // 在DidMount生命周期执行这个是最好的！！
-    getTopicList();     
+    // 因为返回的是一个Promise对象，所以仍然可以进行链式调用
+    getTopicList().then(data => {
+      console.log('取到的数据：' + data);
+    });     
   }
   render () {
     return (

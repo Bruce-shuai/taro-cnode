@@ -5,8 +5,13 @@ export function getJSON(url, data) {
   // 调用getJSON方法，返回的其实就是一个Promise对象
   return Taro.request({url:url, data:data, method:'GET'})
 }
+export function postJSON(url, data) {
+  return Taro.request({url: url, data: data, method: 'POST'})
+}
+
 
 // 获取话题列表， 标记了async 就说明这个函数是异步函数
+// 利用async 目的是使用同步代码完成异步编程，解决频繁的回调
 export async function getTopicList() {
   // 这里写了await，可以指示在此之后的函数调用，只有等待(await)getJSON返回了数据，才允许之后的代码能够执行
   // 这样，让异步的代码像同步的方式一样来开发项目
@@ -14,6 +19,7 @@ export async function getTopicList() {
   let result = await getJSON(api.gettopics).catch(message=>{
     console.log('出错了，错误信息：' + message);
   })      
-  console.log(result);
+  return result;
+  // console.log(result);
   // console.log('123');  // 这里的123 只有getJSON返回数据后，才会继续执行
 }

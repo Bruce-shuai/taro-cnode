@@ -9,9 +9,10 @@ const MENU_STATE={
   showDrawer: false
 }
 
-// 这里要写default
+// 这里要写default    action是最新接受的数据
 export default function meun(prestate = MENU_STATE, action) {
   switch(action.type) {
+    // 这些数据都是要传给store里去的
     // 显示分类抽屉
     case 'showDrawer':
       return {...prestate, showDrawer: true};
@@ -19,7 +20,7 @@ export default function meun(prestate = MENU_STATE, action) {
     case 'hideDrawer':
       return {...prestate, showDrawer: false};
     // 点击抽屉，触发切换分类
-    case 'changeCate':
+    case 'changeCata':
       return {...prestate, currentCata:action.currentCata};
     default: 
       return {...prestate}

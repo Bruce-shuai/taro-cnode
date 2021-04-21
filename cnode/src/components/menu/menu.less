@@ -3,19 +3,26 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* prettier-ignore */
+  height: 50PX;
+  /* prettier-ignore */
+  align-items: center; // 似乎是让子元素居中
   .image {
     /* prettier-ignore */
     width: 28PX;
     /* prettier-ignore */
     height: 28PX;
   }
-  .image:nth-child(2) {
+  .left {
     /* prettier-ignore */
     margin-left: 10PX;
   }
   // 为什么这里是3呢？
-  .image:nth-child(4) {
+  .right {
     /* prettier-ignore */
     margin-right: 10PX;
+  }
+  .drawer {
+    position: absolute;
   }
 }

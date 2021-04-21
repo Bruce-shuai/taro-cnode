@@ -1,4 +1,5 @@
 const config = {
+
   projectName: 'cnode',
   date: '2021-4-18',
   designWidth: 750,
@@ -36,7 +37,8 @@ const config = {
           enable: true
         }
       }
-    }
+    },
+    esnextModules: ['taro-ui']
   }
 }
 

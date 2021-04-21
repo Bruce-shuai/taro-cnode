@@ -1,7 +1,7 @@
 // import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
-
+import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
 
 import configStore from './store'
@@ -13,9 +13,10 @@ const store = configStore()
 class App extends Component {
 
   config = {
-    // 这是所有的路由
+    // 这是所有的路由，增加路由也是在这里增加
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/detail/index'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -39,7 +40,8 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Provider store={store}>
+      // 被Provider包裹的页面都能共享到应用的store
+      <Provider store={store}>   
         <Index />
       </Provider>
     )

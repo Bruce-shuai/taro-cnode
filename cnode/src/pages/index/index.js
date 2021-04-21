@@ -1,10 +1,10 @@
-import Taro, { Component } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import './index.less'
+import Taro, { Component } from '@tarojs/taro';
+import { View } from '@tarojs/components';
+import './index.less';
 // import {getTopicList} from '../../utils/request';
-import Menu from '../../components/menu/menu'   // 注意，引用的名称要相等 
+import Menu from '../../components/menu/menu';   // 注意，引用的名称要相等 
+import Topiclist from '../../components/topiclist/topiclist';   
 class Index extends Component {
-
     config = {
     navigationBarTitleText: '首页'
   }
@@ -34,6 +34,7 @@ class Index extends Component {
     return (
       <View className='index'>
         <Menu />
+        <Topiclist />
       </View>
     )
   }

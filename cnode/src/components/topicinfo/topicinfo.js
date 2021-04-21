@@ -3,7 +3,7 @@ import {View, Text, RichText} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import './topicinfo.less';
 import {myTimeToLocal} from '../../utils/date';
-// 我草，有好多的接口
+
 class TopicInfo extends Component {
   render() {
     let {topicinfo} = this.props;

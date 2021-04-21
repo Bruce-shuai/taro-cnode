@@ -16,7 +16,8 @@ class App extends Component {
     // 这是所有的路由，增加路由也是在这里增加
     pages: [
       'pages/index/index',
-      'pages/detail/index'
+      'pages/detail/index',
+      'pages/login/login'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -40,7 +41,7 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      // 被Provider包裹的页面都能共享到应用的store
+      // 被Provider包裹的页面都能共享到应用的store， 有一个问题： 为什么Provider包裹的只有Index而没有Detail呢？
       <Provider store={store}>   
         <Index />
       </Provider>

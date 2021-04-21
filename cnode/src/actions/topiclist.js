@@ -1,5 +1,6 @@
 import {getJSON, postJSON} from '../utils/request';
 import api from '../constants/api';
+import Taro from '@tarojs/taro';
 
 // 请求首页数据,  这就是一个中间件，不会一来就传给store，而是会等待
 export function getTopicList(params) {
@@ -37,4 +38,30 @@ export function getTopicInfo(params) {
       console.error('请求话题详情失败！');
     }
   }
+}
+// 点赞话题回复
+export function admireTopic(params) {
+  return async dispatch => {
+    // console.log('id：' + params.replyid);
+    let result = await postJSON(api.upreply + params.replyid + '/ups', params);
+    if (result && result.data && result.data.success) {
+      // 点赞成功
+      dispatch({type: 'admireSuccess'})
+    } else {
+      // 点赞失败, 这个弹出功能是Taro自己提供的
+      Taro.showToast({title: '点赞失败', icon: 'none'})
+    }
+  }
+}
+
+export async function replyContent(params) {
+  let result = await postJSON(api.replyTopic + params.topicid + '/replies', params)
+  if (result && result.data && result.data.success) {
+    // 成功评论
+    return result.data;
+  } else {
+    // 评论失败
+    Taro.showToast({title: '评论失败', icon: 'none'})
+  }
+  return false;
 }

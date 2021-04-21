@@ -1,0 +1,25 @@
+.replycontent {
+  width: 100%;
+  height: 100%;
+  // 注意：要知道这里使用fixed 的原因是什么
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2; // 这一步的遮盖很重要
+  background-color: #fff;
+  .replycontent-text {
+    /* prettier-ignore */
+    padding: 10PX;
+  }
+  .replycontent-btngroup {
+    display: flex;
+    flex-direction: row;
+    .btn {
+      width: 40%;
+    }
+    .btn:nth-child(1) {
+      background-color: #ff4081;
+      color: #fff;
+    }
+  }
+}

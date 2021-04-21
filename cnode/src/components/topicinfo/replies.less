@@ -1,6 +1,13 @@
 .topicinfo-repliy {
+  /* prettier-ignore */
+  font-size: 14PX;
   display: flex;
   flex-direction: row;
+  width: 100%; // 这个应该是让子元素相对父元素所写
+  /* prettier-ignore */
+  margin: 20PX 0;
+  /* prettier-ignore */
+  padding: 0 10PX;
   .topicinfo-repliy-image {
     /* prettier-ignore */
     width: 30PX;
@@ -11,9 +18,17 @@
   .topicinfo-repliy-right {
     display: flex;
     flex-direction: row;
+    justify-content: space-between; // 为了让点赞和内容排列整齐
+    flex-grow: 1; //  这个用处是什么？
+    /* prettier-ignore */
+    padding: 0 20PX;
     .topicinfo-repliy-right-body {
       display: flex;
       flex-direction: column;
+      .topicinfo-repliy-right-pie {
+        /* prettier-ignore */
+        margin-bottom: 5PX;
+      }
     }
     .topicinfo-repliy-right-zan {
       display: flex;

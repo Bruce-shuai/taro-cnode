@@ -49,6 +49,13 @@ class Menu extends Component {
   closeDrawer = () => {
     this.props.hideDrawer&&this.props.hideDrawer();
   }
+
+  toLogin = () => {
+    // console.log('我跳');
+    // 跳转到登录页面
+    Taro.navigateTo({url:'/pages/login/login'});
+  }
+
   render() {
     // 这里的this.props是指向哪的？
     let {showDrawer, cataData} = this.props;
@@ -66,7 +73,7 @@ class Menu extends Component {
       {/* 小程序中似乎不能给事件写箭头函数, 这里是给图片弄了个事件来控制抽屉功能 */}
       <Image onClick={this.showDrawer} className='image left' src={require('../../assets/img/cata.png')}/>
       <Text>{this.props.currentCata ? this.props.currentCata.value : ''}</Text>
-      <Image className='image right' src={require('../../assets/img/login.png')}/>
+      <Image onClick={this.toLogin} className='image right' src={require('../../assets/img/login.png')}/>
     </View>
   }
 }

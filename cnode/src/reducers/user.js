@@ -1,10 +1,14 @@
 const USER_STATE = {
-  accesstoken: 'e0b6179c-be80-4554-8f6e-db497e79e3c3', // 用户秘钥
+  accesstoken: null, // 用户秘钥
 }
 
 // 这里的default 不要忘记写了~
 export default function user(prestate=USER_STATE, action) {
   switch(action.type) {
+    case 'loginSuccess': 
+    return {...prestate, ...action}
+    case 'loginFail': 
+    return {...prestate, accesstoken: action.accesstoken, loginname: action.loginname}
     default:
       return {...prestate}
   }

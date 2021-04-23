@@ -2,7 +2,7 @@ import Taro, {Component} from '@tarojs/taro';
 import {View, Image} from '@tarojs/components';
 import {myTimeToLocal} from '../../utils/date'
 import './topic.less';
-// 这里就着重讲页面跳转
+// 这个组件只有简单的渲染，重点在页面跳转
 class Topic extends Component {
   // 跳转到详情页
   goToDetail = (topic) => {

@@ -4,11 +4,12 @@ import { connect } from '@tarojs/redux';
 import { AtDrawer } from 'taro-ui';
 import './menu.less';
 import {showDrawer, changeCata, hideDrawer} from '../../actions/menu';
+import {validateUser} from '../../actions/user';
 
 // 这里的store是最新的state
 @connect(function(store){
   // 这里的store.menu是个什么意思呢？估计这里的store.menu从reducers的  对的，是最新的state
-  return {...store.menu}    // 这里是连接到store.menu吗
+  return {...store.menu, user: store.user}    // 这里是连接到store.menu吗
 }, function(dispatch){
   return {showMenu(){
     // 这种写法是redux异步请求的标准事例
@@ -51,9 +52,18 @@ class Menu extends Component {
   }
 
   toLogin = () => {
-    // console.log('我跳');
-    // 跳转到登录页面
+    let {user} = this.props;
+    validateUser(user).then(result => {
+      if (result) {
+// console.log('我跳');
+    // 成功跳转到用户详情页面
+    Taro.navigateTo({url:'/pages/user/user'});
+      } else {
+    // 失败跳转到登录页
     Taro.navigateTo({url:'/pages/login/login'});
+      }
+    });
+    
   }
 
   render() {
@@ -67,7 +77,7 @@ class Menu extends Component {
       {/* 这个抽屉是单独弄出来的，不是放在图片里面的，但是是通过show来展示或隐藏抽屉 */}
       <View className='drawer'>
         {/* onClose和onItemClcik都是AtDrawer自带的事件 */}
-        {/* (index) => this.clickCata(index) 写成 this.clickCata 叫消参吗?  这里的style 后面必须要写; ？ */}
+        {/* (index) => this.clickCata(index) 写成 this.clickCata 叫消参吗?  注意，onItemClick的index，是人家高阶函数自己提供的 这里的style 后面必须要写; ？ */}
         <AtDrawer onClose={this.closeDrawer} onItemClick={(index) => this.clickCata(index)} style='position:absolute;' show={showDrawer} items={items}/>
       </View>
       {/* 小程序中似乎不能给事件写箭头函数, 这里是给图片弄了个事件来控制抽屉功能 */}

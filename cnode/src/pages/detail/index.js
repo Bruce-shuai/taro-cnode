@@ -5,6 +5,7 @@ import {getTopicInfo, admireTopic, replyContent} from '../../actions/topiclist';
 import TopicInfo from '../../components/topicinfo/topicinfo';
 import Replise from '../../components/topicinfo/replies';
 import ReplyContent from '../../components/topicinfo/replycontent';
+import {validateUser} from '../../actions/user';
 import './detail.less';
 // 这些页面主要是用来组合组件来显示内容的, 页面放逻辑，组件放渲染
 
@@ -63,8 +64,14 @@ class Detail extends Component {
     }
   }
   reply = () => {
-    this.setState({
-      showReplyContent: true
+    validateUser(this.props.user).then(result => {
+      if (result) {
+        this.setState({
+          showReplyContent: true
+        })
+      } else {
+        Taro.navigateTo({url: '/pages/login/login'})
+      }
     })
   }
   closeReplyContent = () => {
@@ -98,7 +105,7 @@ class Detail extends Component {
   }
   render() {
     // 一定非要在render里解构this.props?
-    let {topicinfo, replies} = this.props;
+    let {topicinfo, replies, user} = this.props;
     let {showReplyContent} = this.state;
     return (<View className='detail'>
       {/* 在replyContent用state，不需要使用redux，因为该组件的效果就是只在当前页面有效，没必要使用redux */}
@@ -112,7 +119,9 @@ class Detail extends Component {
         {/* TopicInfo: 展示指定用户发的具体信息 */}
         <TopicInfo topicinfo={topicinfo}/>
         {/* Replise: 展示指定用户获得的评论 */}
-        <Replise replies={replies} 
+        <Replise 
+          user={user}
+          replies={replies} 
           onAdmire={this.admire}
           onReplyToReply = {this.replyToReply}
         />

@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro';
 
 // 请求首页数据,  这就是一个中间件，不会一来就传给store，而是会等待
 export function getTopicList(params) {
+  // 因为这里需要异步请求，就用async-await了，其实也就比普通的dispatch多了这个异步请求操作，可以和menu的action做比较
   return async dispatch => {
     let result = await getJSON(api.gettopics, params)
     if (result && result.data) {
@@ -14,7 +15,7 @@ export function getTopicList(params) {
     }
   }
 }
-// 请求下页数据
+// 请求下页数据  --> 这个和上面的请求首页都差不多！只是多了个page
 export function getNextList(params) {
   return async dispatch => {
     let result = await getJSON(api.gettopics, params)
@@ -62,6 +63,16 @@ export async function replyContent(params) {
   } else {
     // 评论失败
     Taro.showToast({title: '评论失败', icon: 'none'})
+  }
+  return false;
+}
+
+export async function submitTopic(params) {
+  let result = await postJSON(api.createtopic, params)
+  if (result && result.data && result.data.success) {
+    return result.data;
+  } else {
+    Taro.showToast({title: '发布话题失败', icon: 'none'})
   }
   return false;
 }

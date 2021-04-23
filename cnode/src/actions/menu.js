@@ -1,6 +1,6 @@
 import {getTopicList} from './topiclist';
 
-// 显示抽屉
+// 显示抽屉 --> 不需要接口进行网络请求。所以就普通的传一个对象就行
 export function showDrawer() {
   return dispatch => {
     dispatch({type: 'showDrawer'})

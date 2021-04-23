@@ -19,11 +19,12 @@ import Topic from './topic';
 })
 
 class Topiclist extends Component {
-  // 把数据放在这个生命周期函数中好像不是太好吧？！
+  // 在组件装载之前被调用， 目的是在页面刷新前进行内容的输出，这里不知可不可以用debounce？或图片懒加载
   componentWillMount() {
-    // 这里的this.props是哪来的呢？好像是从connect中获取
+    // 这里的this.props是哪来的呢？是从connect中第一个函数的返回值里获取
     let {page, limit, currentCata} = this.props;
-    this.props.getTopicList && this.props.getTopicList({page, limit, tab:currentCata.key});
+    this.props.getTopicList && this.props.getTopicList({page, limit, tab:currentCata.key});  // 其实这里还少了mdrender作为参数，不知道这个参数名或者参数顺序是否有要求？
+    // 上面的这个getTopicList 函数执行后，list就有了内容了
   }
   // 到底后就触发分页请求, 肯定是要请求下一页 没有总页码
   onScrollToLower = () => {

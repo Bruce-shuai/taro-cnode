@@ -1,0 +1,44 @@
+.panel-less {
+  /* prettier-ignore */
+  padding: 10PX;
+  /* prettier-ignore */
+  font-size: 14PX;
+  .topic-panel-title {
+    background-color: #0288d1;
+    color: #fff;
+    /* prettier-ignore */
+    padding: 5PX 0;
+    /* prettier-ignore */
+    padding-left: 10PX;
+    /* prettier-ignore */
+    border-radius: 4PX;
+  }
+  .topic-panel-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* prettier-ignore */
+    margin: 10PX 0;
+    .topic-panel-list-img {
+      border-radius: 50%;
+      /* prettier-ignore */
+      width: 26PX;
+      /* prettier-ignore */
+      height: 26PX;
+      // 图片给一个最小宽度，这样就不会被挤了
+      /* prettier-ignore */
+      min-width: 26PX;
+    }
+    .topic-panel-list-date {
+      color: #ccc;
+    }
+    .topic-panel-list-title {
+      // 注意： 这是重点！  超出部分隐藏
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 50%;
+      color: blue;
+    }
+  }
+}

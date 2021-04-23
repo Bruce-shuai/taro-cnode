@@ -1,10 +1,9 @@
-// import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 import 'taro-ui/dist/style/index.scss'
 import Index from './pages/index'
-
 import configStore from './store'
+// 这一个引用是有什么用呢？
 import '@tarojs/async-await'
 import './app.less'
 
@@ -15,10 +14,11 @@ class App extends Component {
   config = {
     // 这是所有的路由，增加路由也是在这里增加
     pages: [
-      'pages/index/index',
-      'pages/detail/index',
-      'pages/login/login',
-      'pages/user/user'
+      'pages/index/index',    // 主题首页
+      'pages/detail/index',   // 主题详情
+      'pages/login/login',    // 登录页面
+      'pages/user/user',      // 用户个人信息
+      '/pages/publish/publish'
     ],
     window: {
       backgroundTextStyle: 'light',

@@ -2,15 +2,30 @@ import Taro, {Component} from '@tarojs/taro';
 import {View, Image, Text, RichText} from '@tarojs/components';
 import {myTimeToLocal} from '../../utils/date';
 import './replies.less';
+import {validateUser} from '../../actions/user';
 // 写这个的目的是什么呢？  似乎要报错
 // const isweapp = process.env.TARO_NEV == 'weapp';  // 小程序
 class Replies extends Component {
   admire = (reply) => {
-    // 这里必须要用on开头...
-   this.props.onAdmire&&this.props.onAdmire(reply);
+    let {user} = this.props;
+    validateUser(user).then(result => {
+      if (result) {
+        // 这里必须要用on开头...
+        this.props.onAdmire&&this.props.onAdmire(reply);
+      } else {
+        Taro.navigateTo({url: '/pages/login/login'})
+      }
+    })
   }
   replyToReply = (reply) => {
-    this.props.onReplyToReply && this.props.onReplyToReply(reply);
+    let {user} = this.props;
+    validateUser(user).then(result => {
+      if (result) {
+        this.props.onReplyToReply && this.props.onReplyToReply(reply);
+      } else {
+        Taro.navigateTo({url: '/pages/login/login'})
+      }
+    })
   }
   render() {
     let {replies} = this.props;

@@ -19,7 +19,7 @@ export function accessUserToken(params) {
 
 
 // 搞懂几种发送dispatch的方式
-// 获取用户信息
+// 获取用户信息  --> 因为获取用户信息只会在用户信息页面用到，数据没共享概念，就放弃用dispatch的方法来触发，而是用纯函数的方法来触发
 export async function getUserInfo(params) {
   let result = await getJSON(api.getuserinfo + params.loginname)
   if (result && result.data && result.data.success) {
@@ -27,4 +27,12 @@ export async function getUserInfo(params) {
   } else {
     Taro.showToast({title: '拉取用户信息失败'});
   }
+}
+
+// 验证用户信息
+export async function validateUser(params) {
+   if (params && params.accesstoken) {
+     return true;
+   }
+   return false;
 }

@@ -5,12 +5,14 @@ import './index.less';
 import Menu from '../../components/menu/menu';   // 注意，引用的名称要相等 
 import Topiclist from '../../components/topiclist/topiclist';   
 class Index extends Component {
+  // 页面最顶层的文字
     config = {
     navigationBarTitleText: '首页'
   }
 
+  // 这个生命周期函数式在已经装载的组件接受到新属性前调用
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+    console.log('nextProps？' +  this.props, nextProps)
   }
 
   componentWillUnmount () { }
@@ -29,12 +31,14 @@ class Index extends Component {
     //   console.log('取到的数据：' + data);
     // });     
   }
-  // 这里相当于是首页
+  // 这里相当于是首页渲染逻辑
   render () {
     return (
       <View className='index'>
-        <Menu />
-        <Topiclist />
+        {/* 首页的顶部 */}
+        <Menu />    {/* 该组件没有网络请求 */}
+        {/* 首页的内容 */}
+        <Topiclist /> {/* 该组件内容和Menu组件的currentCata数据有关系 */}
       </View>
     )
   }

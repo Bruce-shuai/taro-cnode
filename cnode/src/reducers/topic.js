@@ -1,7 +1,7 @@
-const TOPIC_STATE = {
+const TOPIC_STATE = {   // 这里的数据应该是感觉api的文档和自己实际组件是否需要来写的
   page: 1,
   limit: 20,
-  list: [],
+  list: [],             // 用来接收每个用户发出的信息
   topicinfo:{},
   replies:[],
   admireState: false    // 点赞状态

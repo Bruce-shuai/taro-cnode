@@ -1,6 +1,6 @@
 import Taro, {Component} from '@tarojs/taro';
 import {View, Image} from '@tarojs/components';
-import 'panel.less';
+import './panel.less';
 import {myTimeToLocal} from '../../utils/date';
 class Panel extends Component {
   toDetail = (item) => {

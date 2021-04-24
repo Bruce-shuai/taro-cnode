@@ -12,14 +12,23 @@ import './detail.less';
 // 相当于connect提供了所有的state和dispatch
 // 这里的topicinfo数据是哪来的？
 @connect(function(store){
-  return {admireState: store.topiclist.admireState, user: store.user, topicinfo: store.topiclist.topicinfo, replies: store.topiclist.replies}
+  return {
+    admireState: store.topiclist.admireState, 
+    user: store.user, 
+    topicinfo: store.topiclist.topicinfo, 
+    replies: store.topiclist.replies
+  }
 }, function(dispatch){
-  return {getTopicInfo(params) {
-    dispatch(getTopicInfo(params))
-  }, admireTopic(params) {
-    dispatch(admireTopic(params))
-  }}
+  return {
+    getTopicInfo(params) {
+      dispatch(getTopicInfo(params))
+    }, 
+    admireTopic(params) {
+      dispatch(admireTopic(params))
+    }
+  }
 })
+
 class Detail extends Component {
   config={
     navigationBarTitleText: '话题详情'
@@ -37,12 +46,13 @@ class Detail extends Component {
   componentWillMount() {
     this.getDetail();
   }
+  // ************ 之后可以试试把这个函数变成箭头函数 ***********
   getDetail() {
     let {user} = this.props;
     // this.$router.params 是获取之前传递的参数， 见路径 components/topiclist/topic.js， mdrender是自己设置的属性  
     let params = {id: this.$router.params.topicid, mdrender: true, accesstoken: user.accesstoken}
     // 这个方法是用来
-    this.props.getTopicInfo && this.props.getTopicInfo(params);
+    this.props.getTopicInfo && this.props.getTopicInfo(params);  // 这个一旦执行，store的数据就会更新
     // 这是一个什么用法？ 为什么要这样用呢？为什么要用在componentWillMount里面？
     // 这是页面路由吗？
     // console.log(this.$router.params.topicid);   // 估计是用来定位当前页面的
@@ -99,10 +109,12 @@ class Detail extends Component {
       }
     })
   }
-  // 提供给子组件使用的函数, 这里的reply是从哪儿获得的？？
+  // 提供给子组件使用的函数, 这里的reply是从哪儿获得的？？  ---> 求解
   replyToReply = (reply) => {
     this.setState({currentReply: reply, showReplyContent: true})
   }
+
+
   render() {
     // 一定非要在render里解构this.props?
     let {topicinfo, replies, user} = this.props;

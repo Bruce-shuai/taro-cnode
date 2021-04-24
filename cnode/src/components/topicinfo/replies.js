@@ -27,6 +27,7 @@ class Replies extends Component {
       }
     })
   }
+
   render() {
     let {replies} = this.props;
     // console.log(replies);
@@ -35,7 +36,8 @@ class Replies extends Component {
         replies.map((item, index) => {
           // console.log('item:' + item.is_uped);
           return <View key={item.id} className='topicinfo-repliy'>
-            <Image className='topicinfo-repliy-image' src={item.author?item.author.avatar_url:''}/>
+            {/* 这里的src直接输入地址就可以，挺方便的！ */}
+            <Image className='topicinfo-repliy-image' src={item.author?item.author.avatar_url:''} />
             <View className='topicinfo-repliy-right'>
             <View className='topicinfo-repliy-right-body'>
               <View className='topicinfo-repliy-right-pie'>

@@ -2,14 +2,17 @@ import Taro, {Component} from '@tarojs/taro';
 import {View, Input, Button} from '@tarojs/components';
 import { connect } from '@tarojs/redux';
 import Head from '../../components/head/head';
+// 这个函数非常重要！ 获取用户信息
 import {accessUserToken} from '../../actions/user';
 import './login.less';
 
-@connect(function(store){
-  return {user: store.user}
-}, function(dispatch){
-  return {
-    accessUserToken(params) {
+@connect(
+  function(store){
+    return {user: store.user}
+  }, 
+  function(dispatch){
+    return {
+      accessUserToken(params) {
       // 这里要加个return， 不然then拿不到，这里要好好想想
       return dispatch(accessUserToken(params))
     }
@@ -22,7 +25,7 @@ class Login extends Component {
   }
   changeToken = (e) => {
     if (e && e.target) {
-      // console.log(e.target.value);
+      // console.log(e.target.value);  这里的这个token 没必要发送到全局去
       this.setState({token: e.target.value})
     }
   }

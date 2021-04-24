@@ -18,7 +18,7 @@ class App extends Component {
       'pages/detail/index',   // 主题详情
       'pages/login/login',    // 登录页面
       'pages/user/user',      // 用户个人信息
-      '/pages/publish/publish'
+      'pages/publish/publish'
     ],
     window: {
       backgroundTextStyle: 'light',

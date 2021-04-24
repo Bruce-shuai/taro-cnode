@@ -31,7 +31,7 @@ export function getNextList(params) {
 // 请求话题详情
 export function getTopicInfo(params) {
   return async dispatch => {
-    let result = await getJSON(api.gettopicinfo + params.id, params)
+    let result = await getJSON(api.gettopicinfo + params.id, params)  // 似乎params内部的参数比要求给的要多一个
     if (result && result.data && result.data.success) {
       dispatch({type: 'getTopicInfo', infoData: result.data.data})
     } else {

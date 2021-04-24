@@ -31,12 +31,13 @@ class Index extends Component {
     //   console.log('取到的数据：' + data);
     // });     
   }
+
   // 这里相当于是首页渲染逻辑
-  render () {
+  render() {
     return (
       <View className='index'>
-        {/* 首页的顶部 */}
-        <Menu />    {/* 该组件没有网络请求 */}
+        {/* 首页的顶部 --> 其实就两个图片 + 一个标题*/}
+        <Menu />      {/* 该组件没有网络请求 */}
         {/* 首页的内容 */}
         <Topiclist /> {/* 该组件内容和Menu组件的currentCata数据有关系 */}
       </View>

@@ -4,7 +4,8 @@ export function getJSON(url, data) {
   Taro.showLoading();
   // Taro提供了一个request方法,这个方法返回的其实是一个promise对象。
   // 调用getJSON方法，返回的其实就是一个Promise对象
-  return Taro.request({url:url, data:data, method:'GET'}).then(
+  return Taro.request({url:url, data:data, method:'GET'})
+  .then(
     // 写then的目的就是为了使用Taro.hideLoading，
     // showLoading和hideLoading有什么用呢？ 似乎就是起到一个加载图示的作用
     result => {
@@ -13,11 +14,20 @@ export function getJSON(url, data) {
     }
   )
 }
+
 export function postJSON(url, data) {
   Taro.showLoading();
-  return Taro.request({ header: {
+  return Taro.request({ 
+    header: {
+    // 这里的content-type 是个什么用法呢？
     'content-type': 'application/json'
-  }, url: url, data: data, method: 'POST'}).then(result => {
+    }, 
+    url: url, 
+    data: data, 
+    method: 'POST'
+  })
+  .then(result => {
+    // 返回数据前清除加载图片
     Taro.hideLoading();
     return result;
   })

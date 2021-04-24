@@ -10,7 +10,7 @@ import './publish.less';
 
 class Publish extends Component {
   componentWillMount() {
-    // 这里对edit取参数，想想是为什么呢？
+    // 这里对edit取参数，想想是为什么呢？ 回想一下，是在哪给router定的edit
     let {edit} = this.$router.params;  // 思考一下为什么要这样做
     this.setState({isEdit: edit === '1' }, () => {
       let {topicinfo} = this.props;
@@ -26,7 +26,14 @@ class Publish extends Component {
   }
   changeCata(e){
     let {cataData} = this.props;
-    this.setState({selectCata:cataData[e.detail.value]})
+    console.log('cata:' + this.state.selectCata);
+    // console.log('valuelue:' + cataData[e.target.value].value);
+    this.setState({selectCata: cataData[e.target.value]}, () => {
+      // 获得最新的state
+      console.log('cata123:' + this.state.selectCata.value);
+    })
+    console.log('cata1:' + cataData[e.target.value].value);
+    
   }
   // 标题改变
   titleChange = (e) => {
@@ -39,7 +46,7 @@ class Publish extends Component {
   // 提交
   submitTopic = () => {
     // 数据都不为空的情况下才可以提交
-    let {title, content, isEdit} = this.state;
+    let {title, content, selectCata, isEdit} = this.state;
     let {accesstoken, topicinfo} = this.props;
     if (title && content && selectCata) {
       let params = {tab: 'dev', title, content, accesstoken, topic_id:topicinfo.id}
@@ -68,7 +75,7 @@ class Publish extends Component {
     let { selectCata, topicinfo } = this.state;
     return <View className='publish-topic'>
       <Input value={topicinfo.title} className='publish-topic-title' onInput={this.titleChange} placeholder='请输入您要发布的标题'/>
-      <Textarean value={topicinfo.content} className='publish-topic-content' onInput={this.contentChange} placeholder='请输入您要发布的内容' />
+      <Textarea value={topicinfo.content} className='publish-topic-content' onInput={this.contentChange} placeholder='请输入您要发布的内容' />
       {/* 这个Picker组件要多注意注意！！ */}
       <Picker onChange={this.changeCata} mode='selector' range={cataData} rangeKey='value'>
         <View className='publish-topic-cata'>{selectCata ? selectCata.value : '请选择'}</View>

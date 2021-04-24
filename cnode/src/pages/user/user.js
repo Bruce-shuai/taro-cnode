@@ -4,7 +4,7 @@ import { connect } from '@tarojs/redux';
 import Head from '../../components/head/head';
 import Panel from '../../components/user/panel';
 import { getUserInfo } from '../../actions/user';
-
+import './user.less';
 
 @connect(function(store){
   return {...store.user}
@@ -33,6 +33,7 @@ class User extends Component {
     let {loginname, avatar_url} = this.props;
     let {recent_replies, recent_topics} = this.state;
     return <View>
+      {/* 这里的Head就和login的Head不一样啦！ */}
       <Head loginname={loginname} avatar_url={avatar_url}></Head>
       {/* 这里才用同名的方法，可以学习学习 */}
       <Panel listData={recent_topics} title='最近发布的话题' />

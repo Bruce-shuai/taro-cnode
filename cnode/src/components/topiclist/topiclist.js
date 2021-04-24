@@ -35,7 +35,10 @@ class Topiclist extends Component {
   render() {
     let { list } = this.props;    // 最初的list是空数组
     // onScrollToLower 是滚动到底部会触发事件
-    return <ScrollView style={{height: '650PX'}} onScrollToLower={this.onScrollToLower} scrollY={true}>
+    return <ScrollView 
+      style={{height: '650PX'}} 
+      onScrollToLower={this.onScrollToLower} 
+      scrollY={true}>
       {list.map((item) => <Topic item={item} />)}
     </ScrollView>
   }

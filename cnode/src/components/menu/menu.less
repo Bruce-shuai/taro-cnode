@@ -1,12 +1,15 @@
 .topiclist-menu {
   width: 100%;
   display: flex;
+  // 决定主轴的方向
   flex-direction: row;
+  // 定义项目在主轴上的对齐方式
   justify-content: space-between;
   /* prettier-ignore */
   height: 50PX;
   /* prettier-ignore */
-  align-items: center; // 似乎是让子元素居中
+  // 定义项目在交叉轴（默认方向从上到下）上的对齐方式
+  align-items: center; // center 是在交叉轴的中心对齐
   .image {
     /* prettier-ignore */
     width: 28PX;
@@ -17,12 +20,12 @@
     /* prettier-ignore */
     margin-left: 10PX;
   }
-  // 为什么这里是3呢？
   .right {
     /* prettier-ignore */
     margin-right: 10PX;
   }
   .drawer {
+    // 会往上查找，找到一个设置了position的元素，以该元素为基准定位
     position: absolute;
   }
 }

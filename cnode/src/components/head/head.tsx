@@ -15,6 +15,6 @@ class Head extends Component<IHeadProps, {}> {
       <Image className='login-head-head' src={avatar_url ? avatar_url : require('../../assets/img/head.png')} />
       {loginname ? <Text className='login-head-name'>{loginname}</Text> : null}
     </View>
-  }
+  } 
 }
 export default Head;

@@ -1,19 +1,19 @@
 import Taro, {Component} from '@tarojs/taro';
 import {View, Text, Image} from '@tarojs/components';
-import { connect } from '@tarojs/redux';
-import { AtDrawer } from 'taro-ui';
-import './menu.less';
+import {connect} from '@tarojs/redux';
+import {AtDrawer} from 'taro-ui';
 import {showDrawer, changeCata, hideDrawer} from '../../actions/menu';
 import {validateUser} from '../../actions/user';
+import './menu.less';
 
 // 这里的store是最新的state
 @connect(function(store){
-  // 这里的store.menu是个什么意思呢？估计这里的store.menu从reducers的  对的，是最新的state
+// 这里的store.menu是个什么意思呢？估计这里的store.menu从reducers的  对的，是最新的state
   return {...store.menu, user: store.user}    // 这里是连接到store.menu吗
 }, function(dispatch){
-  return {showMenu(){
-    // 这种写法是redux异步请求的标准事例
-    dispatch(showDrawer())
+return {showMenu(){
+  // 这种写法是redux异步请求的标准事例
+  dispatch(showDrawer())
   },
   hideDrawer(){
     dispatch(hideDrawer())
@@ -29,7 +29,9 @@ class Menu extends Component {
   // 这些函数都是在render函数之外来写的
   // 显示抽屉
   showDrawer = () => {
-    // && 的使用是为了防止showMenu什么都没有报错， 执行showMenu， 就会让dispatch发送一个showDrawer的action
+    // && 的使用是为了防止showMenu什么都没有报错， 
+    // 执行showMenu，这里不需要网络请求接口 
+    // 就会让dispatch发送一个showDrawer的action, 这样就会让store的数据更新
     this.props.showMenu && this.props.showMenu();
   }
   // 获取抽屉列表内容
@@ -54,13 +56,13 @@ class Menu extends Component {
   toLogin = () => {
     let {user} = this.props;
     validateUser(user).then(result => {
+      // 要区分login页面和user页面
       if (result) {
-// console.log('我跳');
-    // 成功跳转到用户详情页面
-    Taro.navigateTo({url:'/pages/user/user'});
+      // 成功跳转到用户详情页面
+      Taro.navigateTo({url:'/pages/user/user'});
       } else {
-    // 失败跳转到登录页
-    Taro.navigateTo({url:'/pages/login/login'});
+      // 失败跳转到登录页
+      Taro.navigateTo({url:'/pages/login/login'});
       }
     });
     
@@ -78,7 +80,15 @@ class Menu extends Component {
       <View className='drawer'>
         {/* onClose和onItemClcik都是AtDrawer自带的事件 */}
         {/* (index) => this.clickCata(index) 写成 this.clickCata 叫消参吗?  注意，onItemClick的index，是人家高阶函数自己提供的 这里的style 后面必须要写; ？ */}
-        <AtDrawer onClose={this.closeDrawer} onItemClick={(index) => this.clickCata(index)} style='position:absolute;' show={showDrawer} items={items}/>
+        <AtDrawer 
+          // 这个事件是组件自带的 
+          onClose={this.closeDrawer} 
+          // 这个事件是组件自带的 
+          onItemClick={(index) => this.clickCata(index)} 
+          style='position:absolute;' 
+          show={showDrawer}    // true，抽屉展开， false，抽屉关闭
+          items={items}
+        />
       </View>
       {/* 小程序中似乎不能给事件写箭头函数, 这里是给图片弄了个事件来控制抽屉功能 */}
       <Image onClick={this.showDrawer} className='image left' src={require('../../assets/img/cata.png')}/>

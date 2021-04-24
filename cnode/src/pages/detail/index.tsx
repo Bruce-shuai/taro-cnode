@@ -34,6 +34,7 @@ import './detail.less';
 
 class Detail extends Component<IDetailProps, IDetailState> {
   config={
+    // 也有利于开发者找到对应页面
     navigationBarTitleText: '话题详情'
   }
 

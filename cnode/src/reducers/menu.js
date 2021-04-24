@@ -15,6 +15,7 @@ export default function meun(prestate = MENU_STATE, action) {
     // 这些数据都是要传给store里去的
     // 显示分类抽屉
     case 'showDrawer':
+      // showDrawer会遮盖住prestate里原来的showDrawer
       return {...prestate, showDrawer: true};
     // 隐藏抽屉
     case 'hideDrawer':

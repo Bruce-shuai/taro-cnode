@@ -2,8 +2,8 @@ import Taro from '@tarojs/taro';  // 端能力api
 import {IValue} from '../interface/ICache';
 // 写入缓存
 export function setCache(key:string, value:IValue):void {
-  let params:any = value;  
-  if (typeof value == 'object') {
+  let params:any = value;      // value可以是任何值
+  if (typeof value === 'object') {
     // JSON.stringify方法用于将 JavaScript 值转换为 JSON 字符串
     params = JSON.stringify(value);   // 说明了JS变量是可以接受JSON的
   }
@@ -13,9 +13,9 @@ export function setCache(key:string, value:IValue):void {
 }
 
 // 读取缓存
-export function getCache(key) {
+export function getCache(key: string) {
   // 从本地缓存中同步获取指定 key 对应的内容。
-  let result = Taro.getStorageSync(key);
+  let result: any = Taro.getStorageSync(key);
   if (result) {
     // JSON.parse用于将一个JSON字符串转换为对象
     result = JSON.parse(result);

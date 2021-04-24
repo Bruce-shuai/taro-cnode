@@ -1,11 +1,19 @@
 import Taro, {Component} from '@tarojs/taro';
-import {View, Text, RichText} from '@tarojs/components';
+import {View, Text, RichText, Image} from '@tarojs/components';
 import './topicinfo.less';
 import {myTimeToLocal} from '../../utils/date';
 
 class TopicInfo extends Component {
+  delTopic(topicinfo) {
+    this.props.onDelTopic && this.props.onDelTopic(topicinfo);
+  }
+  // 编辑话题
+  editTopic(topicinfo) {
+    // 不能使用navigateTo，因为不能刷新，这样保存就没用用处了，这里要多想想
+    Taro.redirectTo({url: '/pages/publish/publish?edit=1'});  // 这里要想想为什么要加参数！
+  }
   render() {
-    let {topicinfo} = this.props;
+    let {topicinfo, selfPublish} = this.props;
 
     return <View className='topic-info'>
       <View className='topic-info-header'>
@@ -27,6 +35,13 @@ class TopicInfo extends Component {
           <Text>{topicinfo.visit_count?topicinfo.visit_count + '次浏览':''}</Text>
           {/* <Text>{}</Text> */}
         </View>
+        {
+          selfPublish?<View className='topic-info-header-img'>
+          <Image onClick={() => this.delTopic(topicinfo)} className='img' src={require('../../assets/img/del.png')}/>
+          <Image onClick={() => this.editTopic(topicinfo)} className='img' src={require('../../assets/img/edit.png')}/>
+        </View>: null
+        }
+        
       </View>
       <View className='topic-info-body'>
         {/* 这里要使用Taro自带组件 RichText来实现富文本 */}

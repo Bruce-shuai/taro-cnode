@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro';  // 端能力api
-
+import {IValue} from '../interface/ICache';
 // 写入缓存
-export function setCache(key, value) {
-  let params = value;  
+export function setCache(key:string, value:IValue):void {
+  let params:any = value;  
   if (typeof value == 'object') {
     // JSON.stringify方法用于将 JavaScript 值转换为 JSON 字符串
     params = JSON.stringify(value);   // 说明了JS变量是可以接受JSON的

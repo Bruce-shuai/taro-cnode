@@ -6,13 +6,16 @@ import TopicInfo from '../../components/topicinfo/topicinfo';
 import Replise from '../../components/topicinfo/replies';
 import ReplyContent from '../../components/topicinfo/replycontent';
 import {validateUser} from '../../actions/user';
+import {IDetailProps, IDetailState} from '../../interface/IDetail';
 import './detail.less';
 // 这些页面主要是用来组合组件来显示内容的, 页面放逻辑，组件放渲染
 
 // 相当于connect提供了所有的state和dispatch
 // 这里的topicinfo数据是哪来的？
-@connect(function(store){
+@connect(function(store): IDetailProps { 
   return {
+    admireTopic,
+    getTopicInfo,   // 后面的getTopicInfo会覆盖掉这里的getTopicInfo
     admireState: store.topiclist.admireState, 
     user: store.user, 
     topicinfo: store.topiclist.topicinfo, 
@@ -29,7 +32,7 @@ import './detail.less';
   }
 })
 
-class Detail extends Component {
+class Detail extends Component<IDetailProps, IDetailState> {
   config={
     navigationBarTitleText: '话题详情'
   }
@@ -38,7 +41,7 @@ class Detail extends Component {
   // static state = {
   //   showReplyContent: true  
   // }
-  state = {
+  state:IDetailState = {
     showReplyContent: false  // 显示回复组件 默认是false
   }
 
@@ -119,6 +122,7 @@ class Detail extends Component {
     // 一定非要在render里解构this.props?
     let {topicinfo, replies, user} = this.props;
     let {showReplyContent} = this.state;
+    let selfPublish = topicinfo.author && user.loginname === topicinfo.author.loginname;
     return (<View className='detail'>
       {/* 在replyContent用state，不需要使用redux，因为该组件的效果就是只在当前页面有效，没必要使用redux */}
       {/* ReplyContent: 给指定用户回复信息 */}
@@ -129,7 +133,7 @@ class Detail extends Component {
         }
         {/* <ReplyContent /> */}
         {/* TopicInfo: 展示指定用户发的具体信息 */}
-        <TopicInfo topicinfo={topicinfo}/>
+        <TopicInfo selfPublish={selfPublish} topicinfo={topicinfo}/>
         {/* Replise: 展示指定用户获得的评论 */}
         <Replise 
           user={user}

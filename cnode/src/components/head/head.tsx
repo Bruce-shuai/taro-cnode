@@ -1,8 +1,10 @@
 import Taro, {Component} from '@tarojs/taro';
 import {View, Image, Text} from '@tarojs/components';
+import {IHeadProps} from '../../interface/IHead';
 import './head.less';
 
-class Head extends Component {
+// 注意：props是通过构造函数传入而来的，所以要给Component传入接口
+class Head extends Component<IHeadProps, {}> {
   render() {
     // this.props数据是在哪获得的？ 这里的数据是从User里面获得的
     let {loginname, avatar_url} = this.props;

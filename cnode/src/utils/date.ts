@@ -1,4 +1,4 @@
-export function myTimeToLocal(inputTime) {
+export function myTimeToLocal(inputTime):string {
 	if (!inputTime && typeof inputTime !== 'number') {
 		return '';
 	}
